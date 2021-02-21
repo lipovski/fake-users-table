@@ -8,6 +8,7 @@ import useDasboardStyles from './styles';
 
 import Table from '../../components/Table';
 import Form from '../../components/Form';
+import Modal from '../../components/Modal';
 
 const Dashboard: React.FC = () => {
   const {
@@ -16,6 +17,9 @@ const Dashboard: React.FC = () => {
     onFormVisibility,
     offFormVisibility,
     handleUserDelete,
+    toggleModalOff,
+    toggleModalOn,
+    isModalVisible,
   } = useDashboardHandler();
   const classes = useDasboardStyles();
 
@@ -28,11 +32,16 @@ const Dashboard: React.FC = () => {
         <Table
           users={users}
           onFormVisibility={onFormVisibility}
-          handleUserDelete={handleUserDelete}
+          toggleModalOn={toggleModalOn}
         />
       )}
-
       {isFormVisible && <Form offFormVisibility={offFormVisibility} />}
+
+      <Modal
+        isModalVisible={isModalVisible}
+        toggleModalOff={toggleModalOff}
+        handleUserDelete={handleUserDelete}
+      />
     </>
   );
 };

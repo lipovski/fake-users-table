@@ -19,8 +19,8 @@ import colors from '../../constants/Colors';
 const Table: React.FC<{
   users: Iuser[];
   onFormVisibility: (selectedUser: Iuser | null) => void;
-  handleUserDelete: (id: number) => void;
-}> = ({ users, onFormVisibility, handleUserDelete }) => {
+  toggleModalOn: (selectedUser: Iuser) => void;
+}> = ({ users, onFormVisibility, toggleModalOn }) => {
   const classes = useTableStyles();
 
   return (
@@ -37,14 +37,7 @@ const Table: React.FC<{
             <TableBody>
               {users.map((row) => (
                 <TableRow key={row.id}>
-                  <TableCell
-                    align="center"
-                    component="th"
-                    scope="row"
-                    padding="none"
-                  >
-                    {row.id}
-                  </TableCell>
+                  <TableCell align="center">{row.id}</TableCell>
                   <TableCell align="center">{row.name}</TableCell>
                   <TableCell align="center">{row.username}</TableCell>
                   <TableCell align="center">{row.email}</TableCell>
@@ -59,7 +52,7 @@ const Table: React.FC<{
                   </TableCell>
                   <TableCell align="center">
                     <Button
-                      onClick={() => handleUserDelete(row.id)}
+                      onClick={() => toggleModalOn(row)}
                       style={{ color: colors.red }}
                     >
                       Delete
