@@ -16,11 +16,19 @@ import useTableStyles from './styles';
 import TableTitle from '../TableTitle';
 import colors from '../../constants/Colors';
 
-const Table: React.FC<{
+interface Iprops {
   users: Iuser[];
   onFormVisibility: (selectedUser: Iuser | null) => void;
   toggleModalOn: (selectedUser: Iuser) => void;
-}> = ({ users, onFormVisibility, toggleModalOn }) => {
+  sortUsersHandler: (columnName: { id: string; order: string }) => void;
+}
+
+const Table: React.FC<Iprops> = ({
+  users,
+  onFormVisibility,
+  toggleModalOn,
+  sortUsersHandler,
+}) => {
   const classes = useTableStyles();
 
   return (
@@ -33,7 +41,7 @@ const Table: React.FC<{
       <Paper className={classes.paper}>
         <TableContainer>
           <TableMui>
-            <TableHead />
+            <TableHead sortUsersHandler={sortUsersHandler} />
             <TableBody>
               {users.map((row) => (
                 <TableRow key={row.id}>

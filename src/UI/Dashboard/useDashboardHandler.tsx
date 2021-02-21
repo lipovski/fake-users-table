@@ -3,7 +3,7 @@ import React from 'react';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import fetchUsers from '../../services/fetchUsersService';
 import deleteUserService from '../../services/deleteUserService';
-import { selectUserForm, deleteUser } from '../../slices/usersSlice';
+import { selectUserForm, deleteUser, sortUsers } from '../../slices/usersSlice';
 import { Iuser } from '../../types/common';
 
 const useDashboardHandler = (): {
@@ -15,6 +15,7 @@ const useDashboardHandler = (): {
   toggleModalOn: (selectedUser: Iuser) => void;
   toggleModalOff: () => void;
   isModalVisible: boolean;
+  sortUsersHandler: (columnName: { id: string; order: string }) => void;
 } => {
   const dispatch = useDispatch();
 
@@ -57,6 +58,10 @@ const useDashboardHandler = (): {
     toggleModalOff();
   };
 
+  const sortUsersHandler = (columnName) => {
+    dispatch(sortUsers(columnName));
+  };
+
   React.useEffect(() => {
     dispatch(fetchUsers());
   }, [dispatch]);
@@ -70,6 +75,7 @@ const useDashboardHandler = (): {
     toggleModalOn,
     toggleModalOff,
     isModalVisible,
+    sortUsersHandler,
   };
 };
 

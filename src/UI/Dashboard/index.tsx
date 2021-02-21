@@ -20,6 +20,7 @@ const Dashboard: React.FC = () => {
     toggleModalOff,
     toggleModalOn,
     isModalVisible,
+    sortUsersHandler,
   } = useDashboardHandler();
   const classes = useDasboardStyles();
 
@@ -28,13 +29,16 @@ const Dashboard: React.FC = () => {
       <Typography className={classes.title} variant="h3">
         Dashboard
       </Typography>
+
       {!isFormVisible && (
         <Table
           users={users}
           onFormVisibility={onFormVisibility}
           toggleModalOn={toggleModalOn}
+          sortUsersHandler={sortUsersHandler}
         />
       )}
+
       {isFormVisible && <Form offFormVisibility={offFormVisibility} />}
 
       <Modal

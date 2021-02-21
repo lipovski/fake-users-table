@@ -89,6 +89,20 @@ const usersSlice = createSlice({
 
       return { ...state, users };
     },
+
+    sortUsers: (state, { payload }) => {
+      const currentUsers = [...current(state.users)];
+      const users =
+        payload.order === 'asc'
+          ? currentUsers.sort((a, b) =>
+              a[payload.id].localeCompare(b[payload.id])
+            )
+          : currentUsers.sort((a, b) =>
+              b[payload.id].localeCompare(a[payload.id])
+            );
+
+      return { ...state, users };
+    },
   },
 });
 
@@ -102,4 +116,5 @@ export const {
   deleteUser,
   editUserData,
   selectUserForm,
+  sortUsers,
 } = usersSlice.actions;
