@@ -30,6 +30,7 @@ module.exports = {
     'linebreak-style': 'off',
     camelcase: 'off',
     'react/prop-types': 0,
+    'no-alert': 'off',
     'no-param-reassign': ['error', { props: false }],
     'prettier/prettier': [
       'error',
