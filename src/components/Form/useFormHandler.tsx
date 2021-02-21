@@ -34,7 +34,6 @@ const useFormHandler = ({ offFormVisibility }: Iprops) => {
   const handleFormSubmit = handleSubmit((data) => {
     // check whether user id exist. If not than create new user, if yest than update existing user.
     const isNew = selectedUser.id === 0 ? addNewUser(data) : editUserData(data);
-
     dispatch(isNew);
     offFormVisibility();
   });

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import fetchUsers from '../../services/fetchUsers';
-import { selectUserForm } from '../../slices/usersSlice';
+import { selectUserForm, deleteUser } from '../../slices/usersSlice';
 import { Iuser } from '../../types/common';
 
 const useDashboardHandler = (): {
@@ -10,6 +10,7 @@ const useDashboardHandler = (): {
   isFormVisible: boolean;
   onFormVisibility: (selectedUser: Iuser | null) => void;
   offFormVisibility: () => void;
+  handleUserDelete: (id: number) => void;
 } => {
   const dispatch = useDispatch();
 
@@ -31,11 +32,19 @@ const useDashboardHandler = (): {
     (state: RootStateOrAny) => state.usersReducer.users
   );
 
+  const handleUserDelete = (id) => dispatch(deleteUser(id));
+
   React.useEffect(() => {
     dispatch(fetchUsers());
   }, [dispatch]);
 
-  return { users, isFormVisible, onFormVisibility, offFormVisibility };
+  return {
+    users,
+    isFormVisible,
+    onFormVisibility,
+    offFormVisibility,
+    handleUserDelete,
+  };
 };
 
 export default useDashboardHandler;

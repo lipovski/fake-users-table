@@ -59,6 +59,13 @@ const usersSlice = createSlice({
 
       return { ...state, users };
     },
+
+    deleteUser: (state, { payload }) => {
+      const currentUsers = [...current(state.users)];
+      const users = currentUsers.filter((user) => user.id !== payload);
+      return { ...state, users };
+    },
+
     editUserData: (state, { payload }) => {
       // 1. Copy current users array to avoid mutation
       // 2. Find user by id
@@ -96,6 +103,7 @@ export const {
   getUsersSuccess,
   getUsersFailure,
   addNewUser,
+  deleteUser,
   editUserData,
   selectUserForm,
 } = usersSlice.actions;

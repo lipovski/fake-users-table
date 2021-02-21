@@ -19,8 +19,10 @@ import colors from '../../constants/Colors';
 const Table: React.FC<{
   users: Iuser[];
   onFormVisibility: (selectedUser: Iuser | null) => void;
-}> = ({ users, onFormVisibility }) => {
+  handleUserDelete: (id: number) => void;
+}> = ({ users, onFormVisibility, handleUserDelete }) => {
   const classes = useTableStyles();
+
   return (
     <div className={classes.root}>
       <TableTitle
@@ -56,7 +58,12 @@ const Table: React.FC<{
                     </Button>
                   </TableCell>
                   <TableCell align="center">
-                    <Button style={{ color: colors.red }}>Delete</Button>
+                    <Button
+                      onClick={() => handleUserDelete(row.id)}
+                      style={{ color: colors.red }}
+                    >
+                      Delete
+                    </Button>
                   </TableCell>
                 </TableRow>
               ))}

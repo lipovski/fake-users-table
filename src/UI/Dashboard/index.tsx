@@ -15,6 +15,7 @@ const Dashboard: React.FC = () => {
     isFormVisible,
     onFormVisibility,
     offFormVisibility,
+    handleUserDelete,
   } = useDashboardHandler();
   const classes = useDasboardStyles();
 
@@ -24,7 +25,11 @@ const Dashboard: React.FC = () => {
         Dashboard
       </Typography>
       {!isFormVisible && (
-        <Table users={users} onFormVisibility={onFormVisibility} />
+        <Table
+          users={users}
+          onFormVisibility={onFormVisibility}
+          handleUserDelete={handleUserDelete}
+        />
       )}
 
       {isFormVisible && <Form offFormVisibility={offFormVisibility} />}
