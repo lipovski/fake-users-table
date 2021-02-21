@@ -1,13 +1,15 @@
 import React from 'react';
 
 import { Button } from '@material-ui/core';
-import TextInput from '../TextInput';
 
 import useFormStyles from './styles';
 import useFormHandler from './useFormHandler';
 import validation from './validation';
 
 import colors from '../../constants/Colors';
+import TextInput from '../../components/TextInput';
+
+import C from '../../constants/form';
 
 interface Iprops {
   offFormVisibility: () => void;
@@ -23,7 +25,7 @@ const Form: React.FC<Iprops> = ({ offFormVisibility }) => {
   return (
     <form onSubmit={handleFormSubmit} className={classes.formContainer}>
       <TextInput
-        name="name"
+        name={C.NAME}
         title="Name"
         inputRef={register(validation.name)}
         error={errors.name}
@@ -31,7 +33,7 @@ const Form: React.FC<Iprops> = ({ offFormVisibility }) => {
       />
 
       <TextInput
-        name="email"
+        name={C.EMAIL}
         title="Email"
         inputRef={register(validation.email)}
         error={errors.email}
@@ -39,7 +41,7 @@ const Form: React.FC<Iprops> = ({ offFormVisibility }) => {
       />
 
       <TextInput
-        name="username"
+        name={C.USERNAME}
         title="Username"
         inputRef={register(validation.username)}
         error={errors.username}
@@ -47,7 +49,7 @@ const Form: React.FC<Iprops> = ({ offFormVisibility }) => {
       />
 
       <TextInput
-        name="city"
+        name={C.CITY}
         title="City"
         inputRef={register(validation.city)}
         error={errors.city}

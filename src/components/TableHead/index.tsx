@@ -7,15 +7,15 @@ import {
   TableSortLabel,
 } from '@material-ui/core';
 
-import headCells from './headCells';
-
 import useTableStyles from '../Table/styles';
+import { IheadCells } from '../../types/common';
 
 interface Iprops {
   sortUsersHandler: (prop: { id: string; order: string }) => void;
+  headCells: IheadCells[];
 }
 
-const TableHead: React.FC<Iprops> = ({ sortUsersHandler }) => {
+const TableHead: React.FC<Iprops> = ({ sortUsersHandler, headCells }) => {
   const [isAsc, setIsAsc] = React.useState<boolean>(false);
   const classes = useTableStyles();
   return (

@@ -15,7 +15,10 @@ const TableTitle: React.FC<Iprops> = ({ title, buttonText, buttonOnCLick }) => {
   return (
     <div className={classes.root}>
       <Typography>{title}</Typography>
-      <Button onClick={buttonOnCLick} style={{ color: colors.blue }}>
+      <Button
+        onClick={buttonOnCLick}
+        style={{ background: colors.blue, color: colors.white }}
+      >
         {buttonText}
       </Button>
     </div>

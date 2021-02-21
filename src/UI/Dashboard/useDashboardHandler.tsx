@@ -1,9 +1,10 @@
 import React from 'react';
 
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
+import { selectUserForm, deleteUser, sortUsers } from '../../slices/usersSlice';
+
 import fetchUsers from '../../services/fetchUsersService';
 import deleteUserService from '../../services/deleteUserService';
-import { selectUserForm, deleteUser, sortUsers } from '../../slices/usersSlice';
 import { Iuser } from '../../types/common';
 
 const useDashboardHandler = (): {
@@ -22,19 +23,13 @@ const useDashboardHandler = (): {
   const [isFormVisible, setIsFormVisible] = React.useState<boolean>(false);
   const [isModalVisible, setIsModalVisible] = React.useState<boolean>(false);
 
-  const users = useSelector(
-    (state: RootStateOrAny) => state.usersReducer.users
+  const { users, selectedUser } = useSelector(
+    (state: RootStateOrAny) => state.usersReducer
   );
 
-  const selectedUserModal = useSelector(
-    (state: RootStateOrAny) => state.usersReducer.selectedUser
-  );
-
-  const onFormVisibility: (selectedUser: Iuser | null) => void = (
-    selectedUser
-  ) => {
+  const onFormVisibility = (user) => {
     setIsFormVisible(true);
-    dispatch(selectUserForm(selectedUser));
+    dispatch(selectUserForm(user));
   };
 
   const offFormVisibility = () => {
@@ -42,9 +37,9 @@ const useDashboardHandler = (): {
     dispatch(selectUserForm({}));
   };
 
-  const toggleModalOn = (selectedUser) => {
+  const toggleModalOn = (user) => {
     setIsModalVisible(true);
-    dispatch(selectUserForm(selectedUser));
+    dispatch(selectUserForm(user));
   };
 
   const toggleModalOff = () => {
@@ -53,8 +48,8 @@ const useDashboardHandler = (): {
   };
 
   const handleUserDelete = async () => {
-    await deleteUserService(selectedUserModal.id);
-    dispatch(deleteUser(selectedUserModal.id));
+    await deleteUserService(selectedUser.id);
+    dispatch(deleteUser(selectedUser.id));
     toggleModalOff();
   };
 

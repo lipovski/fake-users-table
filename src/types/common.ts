@@ -7,3 +7,9 @@ export interface Iuser {
     city: string;
   };
 }
+
+export interface IheadCells {
+  id: string;
+  label: string;
+  sorted?: boolean;
+}
