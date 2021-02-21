@@ -1,5 +1,8 @@
-export interface IuserdsState {
+import { Iuser } from '../types/common';
+
+export interface Istate {
   loading: boolean;
   hasErrors: boolean;
-  users: string[];
+  users: Iuser[];
+  selectedUser: Iuser;
 }

@@ -1,9 +1,17 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, current } from '@reduxjs/toolkit';
+import { Istate } from './types';
 
-const initialState = {
+const initialState: Istate = {
   loading: false,
   hasErrors: false,
   users: [],
+  selectedUser: {
+    name: '',
+    email: '',
+    id: 0,
+    username: '',
+    address: { city: '' },
+  },
 };
 
 const usersSlice = createSlice({
@@ -22,6 +30,31 @@ const usersSlice = createSlice({
       state.loading = false;
       state.hasErrors = true;
     },
+    selectUserForm: (state, { payload }) => {
+      state.selectedUser = payload;
+    },
+    editUserData: (state, { payload }) => {
+      const oldUsers = [...current(state.users)];
+
+      const selectedUser = oldUsers.filter(
+        (user) => user.id === state.selectedUser.id
+      )[0];
+
+      const updatedUser = {
+        ...selectedUser,
+        name: payload.name,
+        email: payload.email,
+        username: payload.username,
+        address: { city: payload.city },
+      };
+
+      const users = [
+        ...oldUsers.filter((user) => user.id !== state.selectedUser.id),
+        updatedUser,
+      ].sort((a, b) => a.id - b.id);
+
+      return { ...state, users };
+    },
   },
 });
 
@@ -31,4 +64,6 @@ export const {
   getUsers,
   getUsersSuccess,
   getUsersFailure,
+  editUserData,
+  selectUserForm,
 } = usersSlice.actions;

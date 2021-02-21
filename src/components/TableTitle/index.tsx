@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { Typography } from '@material-ui/core';
-import Button from '../Button';
+import { Typography, Button } from '@material-ui/core';
 import useTableTitleClasses from './styles';
 import colors from '../../constants/Colors';
 
@@ -16,7 +15,9 @@ const TableTitle: React.FC<Iprops> = ({ title, buttonText, buttonOnCLick }) => {
   return (
     <div className={classes.root}>
       <Typography>{title}</Typography>
-      <Button text={buttonText} onClick={buttonOnCLick} color={colors.blue} />
+      <Button onClick={buttonOnCLick} style={{ color: colors.blue }}>
+        {buttonText}
+      </Button>
     </div>
   );
 };

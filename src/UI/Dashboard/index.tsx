@@ -1,13 +1,21 @@
 import React from 'react';
 
 import { Typography } from '@material-ui/core';
-import Table from '../../components/Table';
 
 import useDashboardHandler from './useDashboardHandler';
+
 import useDasboardStyles from './styles';
 
+import Table from '../../components/Table';
+import Form from '../../components/Form';
+
 const Dashboard: React.FC = () => {
-  const { users } = useDashboardHandler();
+  const {
+    users,
+    isFormVisible,
+    onFormVisibility,
+    offFormVisibility,
+  } = useDashboardHandler();
   const classes = useDasboardStyles();
 
   return (
@@ -15,7 +23,11 @@ const Dashboard: React.FC = () => {
       <Typography className={classes.title} variant="h3">
         Dashboard
       </Typography>
-      <Table users={users} />
+      {!isFormVisible && (
+        <Table users={users} onFormVisibility={onFormVisibility} />
+      )}
+
+      {isFormVisible && <Form offFormVisibility={offFormVisibility} />}
     </>
   );
 };
