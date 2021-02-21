@@ -1,24 +1,37 @@
-# Getting Started with Create React App
+# Overview
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The key functionality of the app is to display users from the remote API. Users can be editted, deleted or a new user can be created.
 
 ## Available Scripts
 
-In the project directory, you can run:
-
 ### `yarn start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+To open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-### `yarn build`
+### `yarn`
 
-Builds the app for production to the `build` folder.\
+To install dependencies.
 
-### `Linter`
+## `Linter`
 
 Airbnb, prettier configs used
 
-### Node Version
+## Node Version
 
 v14.15.4
+
+## State management
+
+Redux toolkit. Slices.
+
+## Form management
+
+React hook form.
+
+## Components library
+
+Material UI.
+
+## Request handling
+
+Axios.
