@@ -26,7 +26,7 @@ const Table: React.FC<{
       <TableTitle
         title="Users list"
         buttonText="Add new"
-        buttonOnCLick={() => alert('Add')}
+        buttonOnCLick={() => onFormVisibility(null)}
       />
       <Paper className={classes.paper}>
         <TableContainer>

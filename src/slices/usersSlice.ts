@@ -21,22 +21,53 @@ const usersSlice = createSlice({
     getUsers: (state) => {
       state.loading = true;
     },
+
     getUsersSuccess: (state, { payload }) => {
       state.users = payload;
       state.loading = false;
       state.hasErrors = false;
     },
+
     getUsersFailure: (state) => {
       state.loading = false;
       state.hasErrors = true;
     },
+
     selectUserForm: (state, { payload }) => {
-      state.selectedUser = payload;
+      // If user exist than set its values to state, if not than use initial state
+      const newUser = { ...initialState.selectedUser };
+      state.selectedUser = !payload ? newUser : payload;
+    },
+
+    addNewUser: (state, { payload }) => {
+      // 1. Copy current users array to avoid mutation
+      // 2. Create new user
+      // 3. Add to existing users
+
+      const id = current(state.users).length + 1;
+
+      const currentUsers = [...current(state.users)];
+      const newUser = {
+        id,
+        name: payload.name,
+        email: payload.email,
+        username: payload.username,
+        address: { city: payload.city },
+      };
+
+      const users = [...currentUsers, newUser];
+
+      return { ...state, users };
     },
     editUserData: (state, { payload }) => {
-      const oldUsers = [...current(state.users)];
+      // 1. Copy current users array to avoid mutation
+      // 2. Find user by id
+      // 3. Edit user properties
+      // 4. Add user to array and sort ascening by id
 
-      const selectedUser = oldUsers.filter(
+      const currentUsers = [...current(state.users)];
+
+      const selectedUser = currentUsers.filter(
         (user) => user.id === state.selectedUser.id
       )[0];
 
@@ -49,7 +80,7 @@ const usersSlice = createSlice({
       };
 
       const users = [
-        ...oldUsers.filter((user) => user.id !== state.selectedUser.id),
+        ...currentUsers.filter((user) => user.id !== state.selectedUser.id),
         updatedUser,
       ].sort((a, b) => a.id - b.id);
 
@@ -64,6 +95,7 @@ export const {
   getUsers,
   getUsersSuccess,
   getUsersFailure,
+  addNewUser,
   editUserData,
   selectUserForm,
 } = usersSlice.actions;

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useForm } from 'react-hook-form';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
-import { editUserData } from '../../slices/usersSlice';
+import { editUserData, addNewUser } from '../../slices/usersSlice';
 import { Iprops } from './types';
 
 const initialState = {
@@ -32,7 +32,10 @@ const useFormHandler = ({ offFormVisibility }: Iprops) => {
     setFormValues({ ...formValues, [e.name]: e.target.value });
 
   const handleFormSubmit = handleSubmit((data) => {
-    dispatch(editUserData(data));
+    // check whether user id exist. If not than create new user, if yest than update existing user.
+    const isNew = selectedUser.id === 0 ? addNewUser(data) : editUserData(data);
+
+    dispatch(isNew);
     offFormVisibility();
   });
 

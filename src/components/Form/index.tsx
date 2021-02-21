@@ -27,7 +27,7 @@ const Form: React.FC<Iprops> = ({ offFormVisibility }) => {
         title="Name"
         inputRef={register(validation.name)}
         error={errors.name}
-        defaultValue={selectedUser.name}
+        defaultValue={selectedUser?.name}
       />
 
       <TextInput
@@ -35,7 +35,7 @@ const Form: React.FC<Iprops> = ({ offFormVisibility }) => {
         title="Email"
         inputRef={register(validation.email)}
         error={errors.email}
-        defaultValue={selectedUser.email}
+        defaultValue={selectedUser?.email}
       />
 
       <TextInput
@@ -43,7 +43,7 @@ const Form: React.FC<Iprops> = ({ offFormVisibility }) => {
         title="Username"
         inputRef={register(validation.username)}
         error={errors.username}
-        defaultValue={selectedUser.username}
+        defaultValue={selectedUser?.username}
       />
 
       <TextInput
@@ -51,7 +51,7 @@ const Form: React.FC<Iprops> = ({ offFormVisibility }) => {
         title="City"
         inputRef={register(validation.city)}
         error={errors.city}
-        defaultValue={selectedUser.address.city}
+        defaultValue={selectedUser?.address?.city}
       />
 
       <div className={classes.buttonContainer}>
