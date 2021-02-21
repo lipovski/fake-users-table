@@ -1,9 +1,10 @@
 import React from 'react';
 
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
-import fetchUsers from '../../services/fetchUsers';
+import fetchUsers from '../../services/fetchUsersService';
 import { selectUserForm, deleteUser } from '../../slices/usersSlice';
 import { Iuser } from '../../types/common';
+import deleteUserService from '../../services/deleteUserService';
 
 const useDashboardHandler = (): {
   users: Iuser[];
@@ -32,7 +33,10 @@ const useDashboardHandler = (): {
     (state: RootStateOrAny) => state.usersReducer.users
   );
 
-  const handleUserDelete = (id) => dispatch(deleteUser(id));
+  const handleUserDelete = async (id) => {
+    await deleteUserService(id);
+    dispatch(deleteUser(id));
+  };
 
   React.useEffect(() => {
     dispatch(fetchUsers());

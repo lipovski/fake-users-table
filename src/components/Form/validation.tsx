@@ -11,6 +11,6 @@ export default {
       message: 'Invalid Email Format',
     },
   },
-  username: { required: { value: true, message: 'Name is required' } },
-  city: { required: { value: true, message: 'Name is required' } },
+  username: { required: { value: true, message: 'Username is required' } },
+  city: { required: { value: true, message: 'City is required' } },
 };

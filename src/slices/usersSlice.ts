@@ -44,14 +44,10 @@ const usersSlice = createSlice({
       // 2. Create new user
       // 3. Add to existing users
 
-      const id = current(state.users).length + 1;
-
       const currentUsers = [...current(state.users)];
+
       const newUser = {
-        id,
-        name: payload.name,
-        email: payload.email,
-        username: payload.username,
+        ...payload,
         address: { city: payload.city },
       };
 
